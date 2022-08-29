@@ -34,7 +34,39 @@ namespace NetcoreSocialLoginExample.Controllers
                     claim.Value,
                 });
 
-            return Json(claims);
+            var providerKey = claims
+                .Where(x => x.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"))
+                .Select(x => x.Value)
+                .FirstOrDefault();
+
+            var emailAddress = claims
+                .Where(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")
+                .Select(x => x.Value)
+                .FirstOrDefault();
+
+            var name = claims //display name
+                .Where(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
+                .Select(x => x.Value)
+                .FirstOrDefault();
+
+            var givenName = claims
+                .Where(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")
+                .Select(x => x.Value)
+                .FirstOrDefault();
+
+            var surName = claims
+                .Where(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname")
+                .Select(x => x.Value)
+                .FirstOrDefault();
+
+
+            ViewData["ProviderKey"] = providerKey;
+            ViewData["EmailAddress"] = emailAddress;
+            ViewData["Name"] = name;
+            ViewData["GivenName"] = givenName;
+            ViewData["SurName"] = surName;
+
+            return View();
         }
     }
 }

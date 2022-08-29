@@ -1,0 +1,14 @@
+﻿@{
+    var providerKey = ViewData["ProviderKey"];
+    var emailAddress = ViewData["EmailAddress"];
+    var name = ViewData["Name"]; 
+    var giventName = ViewData["GivenName"];
+    var surName = ViewData["SurName"];
+}
+
+<h1> Success Google Login</h1>
+<p>provider key: @providerKey</p>
+<p>email address: @emailAddress</p>
+<p>name: @name</p>
+<p>given name: @giventName</p>
+<p>surname: @surName</p>
